@@ -1,0 +1,3 @@
+export const GET_COURSES = 'GET_COURSES'
+export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
