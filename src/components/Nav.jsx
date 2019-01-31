@@ -1,78 +1,107 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Nav = props => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-md navbar-light navbar-laravel">
             <div className="container">
-                <NavLink className="navbar-brand" to="">
+                <Link className="navbar-brand" href="{{ url('/') }}" to="/">
                     Levelup
-                </NavLink>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
-                    data-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-label="{{ __('Toggle navigation') }}"
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
+
+                <div
+                    className="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                >
+                    <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/courses">
-                                Courses
-                            </NavLink>
-                        </li>
-
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">
-                                Login
-                            </NavLink>
-                        </li>
-
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/register">
-                                Register
+                                Courses{" "}
                             </NavLink>
                         </li>
                     </ul>
-                    {/*
-                    <ul className="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a
-                                class="nav-link dropdown-toggle float-right"
-                                href="#"
-                                id="navbarDropdownMenuLink"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                Dropdown link
-                            </a>
-                            <div
-                                class="dropdown-menu"
-                                aria-labelledby="navbarDropdownMenuLink"
-                            >
-                                <a class="dropdown-item" href="#">
-                                    Action
+
+                    <ul className="navbar-nav ml-auto">
+                        {!localStorage.getItem("user") && (
+                            <React.Fragment>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/login">
+                                        Login{" "}
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink
+                                        className="nav-link"
+                                        to="/register"
+                                    >
+                                        Register{" "}
+                                    </NavLink>
+                                </li>
+                            </React.Fragment>
+                        )}
+
+                        {localStorage.getItem("user") && (
+                            <li className="nav-item dropdown">
+                                <a
+                                    id="navbarDropdown"
+                                    className="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                >
+                                    {fullName(props)} <span className="caret" />
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    Another action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    Something else here
-                                </a>
-                            </div>
-                        </li>
-                    </ul> */}
+
+                                <div
+                                    className="dropdown-menu dropdown-menu-right"
+                                    aria-labelledby="navbarDropdown"
+                                >
+                                    <a
+                                        className="dropdown-item"
+                                        href="#"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                        )}
+                    </ul>
                 </div>
             </div>
         </nav>
     );
 };
 
-export default Nav;
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    };
+};
+
+const fullName = props => {
+    return props.auth.user.name;
+};
+
+const handleLogout = e => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    return window.location.assign("/login");
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(Nav);

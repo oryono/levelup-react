@@ -17,15 +17,15 @@ export const login = (credentials, history) => {
             const { data } = await Api.post("auth/login", credentials);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user", JSON.stringify(data.user.original));
+            localStorage.setItem("isAuthenticated", true);
             dispatch({
                 type: LOGIN_SUCCESSFUL,
-                payload: data
+                payload: data.user.original
             });
 
             history.push("courses");
-
-            // console.log("props", props);
         } catch (e) {
+            console.log(e.response);
             dispatch({
                 type: LOGIN_ERROR,
                 payload: e.response.data.error
