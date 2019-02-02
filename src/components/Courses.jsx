@@ -8,7 +8,7 @@ class Courses extends Component {
     handlePageChange = page => {
         this.props.getCourses(page);
     };
-    componentDidMount() {
+    componentWillMount() {
         this.props.getCourses();
     }
 

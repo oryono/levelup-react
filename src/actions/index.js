@@ -23,9 +23,9 @@ export const login = (credentials, history, location) => {
                 payload: data.user.original
             });
             if (location.state) {
-                return history.push(location.state.from.pathname)
+                return window.location.assign(location.state.from.pathname);
             }
-            return history.push("/");
+            return window.location.assign('/');
 
         } catch (e) {
             console.log(e.response);
