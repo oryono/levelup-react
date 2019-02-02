@@ -11,7 +11,7 @@ export const getCourses = page => {
     };
 };
 
-export const login = (credentials, history) => {
+export const login = (credentials, history, location) => {
     return async dispatch => {
         try {
             const { data } = await Api.post("auth/login", credentials);
@@ -22,8 +22,11 @@ export const login = (credentials, history) => {
                 type: LOGIN_SUCCESSFUL,
                 payload: data.user.original
             });
+            if (location.state) {
+                return history.push(location.state.from.pathname)
+            }
+            return history.push("/");
 
-            history.push("courses");
         } catch (e) {
             console.log(e.response);
             dispatch({
@@ -33,3 +36,7 @@ export const login = (credentials, history) => {
         }
     };
 };
+
+export const isAuthenticated = () => {
+    return localStorage.getItem('isAuthenticated')
+}

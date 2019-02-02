@@ -15,6 +15,7 @@ class Login extends Form {
             email: "",
             password: ""
         }
+
     };
 
     schema = {
@@ -28,7 +29,7 @@ class Login extends Form {
     };
 
     doSubmit = () => {
-        this.props.login(this.state.data, this.props.history);
+        this.props.login(this.state.data, this.props.history, this.props.location);
     };
 
     render() {
@@ -87,7 +88,6 @@ class Login extends Form {
 }
 
 const mapStateToProps = state => {
-    console.log("State", state);
     return {
         login_error: state.auth.login_error
     };

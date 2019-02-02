@@ -1,6 +1,6 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import {NavLink, Link} from "react-router-dom";
+import {connect} from "react-redux";
 
 const Nav = props => {
     return (
@@ -17,7 +17,7 @@ const Nav = props => {
                     aria-controls="navbarSupportedContent"
                     aria-label="{{ __('Toggle navigation') }}"
                 >
-                    <span className="navbar-toggler-icon" />
+                    <span className="navbar-toggler-icon"/>
                 </button>
 
                 <div
@@ -60,7 +60,7 @@ const Nav = props => {
                                     role="button"
                                     data-toggle="dropdown"
                                 >
-                                    {fullName(props)} <span className="caret" />
+                                    {fullName(props)} <span className="caret"/>
                                 </a>
 
                                 <div
@@ -98,6 +98,7 @@ const handleLogout = e => {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("isAuthenticated");
     return window.location.assign("/login");
 };
 
