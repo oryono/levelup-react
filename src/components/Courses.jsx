@@ -6,10 +6,10 @@ import Paginator from "@oryono/react-paginator";
 
 class Courses extends Component {
     handlePageChange = page => {
-        this.props.getCourses(page);
+        this.props.getCourses(page, this.props.history, this.props.location);
     };
     componentWillMount() {
-        this.props.getCourses();
+        this.props.getCourses(undefined, this.props.history, this.props.location);
     }
 
     render() {
@@ -26,7 +26,9 @@ class Courses extends Component {
                 {courseItems}
                 <Paginator
                     totalCount={this.props.courses.meta.pagination.total}
-                    currentPage={this.props.courses.meta.pagination.current_page}
+                    currentPage={
+                        this.props.courses.meta.pagination.current_page
+                    }
                     pageSize={this.props.courses.meta.pagination.per_page}
                     onPageChange={this.handlePageChange}
                 />

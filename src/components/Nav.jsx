@@ -6,7 +6,7 @@ const Nav = props => {
     return (
         <nav className="navbar navbar-expand-md navbar-light navbar-laravel">
             <div className="container">
-                <Link className="navbar-brand" href="{{ url('/') }}" to="/">
+                <Link className="navbar-brand" to="/">
                     Levelup
                 </Link>
                 <button
@@ -27,7 +27,19 @@ const Nav = props => {
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/courses">
-                                Courses{" "}
+                                All Courses{" "}
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/my-courses">
+                                My Courses{" "}
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/enrolled">
+                                Enrolled{" "}
                             </NavLink>
                         </li>
                     </ul>
@@ -67,6 +79,12 @@ const Nav = props => {
                                     className="dropdown-menu dropdown-menu-right"
                                     aria-labelledby="navbarDropdown"
                                 >
+                                    <a
+                                        className="dropdown-item"
+                                        href="/profile"
+                                    >
+                                        Profile
+                                    </a>
                                     <a
                                         className="dropdown-item"
                                         href="#"
