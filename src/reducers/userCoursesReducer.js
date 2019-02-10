@@ -1,7 +1,7 @@
-import {GET_ALL_COURSES} from "../actions/types";
+import {GET_USER_COURSES, GET_USER_COURSES_ERROR} from "../actions/types";
 
 const initialState = {
-    courses: {
+    userCourses: {
         data: [],
         meta: {
             pagination: {
@@ -16,15 +16,22 @@ const initialState = {
                 }
             }
         }
-    }
+    },
+    errors: {}
+
 }
 
-export default (state = initialState,  action) => {
+export default (state=initialState, action) => {
     switch (action.type) {
-        case GET_ALL_COURSES:
+        case GET_USER_COURSES:
             return {
                 ...state,
-                courses: action.payload
+                userCourses: action.payload
+            };
+        case GET_USER_COURSES_ERROR:
+            return {
+                ...state,
+                errors: action.payload,
             };
         default:
             return state;

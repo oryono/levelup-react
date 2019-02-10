@@ -1,22 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getCourses } from "../actions";
-import { Link } from "react-router-dom";
+import React, {Component} from 'react'
+import {getUserCourses} from "../actions";
+import {connect } from 'react-redux'
+import {Link} from "react-router-dom";
 import Paginator from "@oryono/react-paginator";
 import Course from "./Course";
 
-class Courses extends Component {
-    handlePageChange = page => {
-        this.props.getCourses(page, this.props.history, this.props.location);
-    };
-    componentWillMount() {
-        this.props.getCourses(undefined, this.props.history, this.props.location);
+class MyCourses extends Component {
+    componentDidMount() {
+        this.props.getUserCourses(null, this.props.user.id, this.props.history, this.props.location)
     }
+
+    handlePageChange = page => {
+        this.props.getCourses(page, this.props.user.id, this.props.history, this.props.location);
+    };
 
     render() {
         const courseItems = this.props.courses.data.map(course => (
-            <Course key={course.id} course={course} history={this.props.history}/>
-        ));
+            <Course key={course.id} course={course}/>
+        ))
 
         return (
             <div>
@@ -30,17 +31,18 @@ class Courses extends Component {
                     onPageChange={this.handlePageChange}
                 />
             </div>
-        );
+        )
+
     }
+
 }
 
 const mapStateToProps = state => {
     return {
-        courses: state.courses.courses
-    };
-};
+        user: state.auth.user,
+        courses: state.userCourses.userCourses
 
-export default connect(
-    mapStateToProps,
-    { getCourses }
-)(Courses);
+    }
+}
+
+export default connect(mapStateToProps, {getUserCourses})(MyCourses)

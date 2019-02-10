@@ -32,14 +32,14 @@ const Nav = props => {
                         </li>
 
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/my-courses">
+                            <NavLink className="nav-link" to="/mycourses">
                                 My Courses{" "}
                             </NavLink>
                         </li>
 
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/enrolled">
-                                Enrolled{" "}
+                            <NavLink className="nav-link" to="/enrollments">
+                                Enrollments{" "}
                             </NavLink>
                         </li>
                     </ul>

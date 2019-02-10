@@ -1,4 +1,4 @@
-import { LOGIN_ERROR, LOGIN_SUCCESSFUL } from "../actions/types";
+import {LOGIN_ERROR, LOGIN_SUCCESSFUL, REGISTER_ERROR, REGISTER_SUCCESS} from "../actions/types";
 const initialState = {
     isAuthenticated: false,
     login_error: null,
@@ -11,6 +11,12 @@ const initialState = {
             name: null,
             updated_at: null
         }
+    },
+
+    registration_errors: {
+        email: null,
+        name: null,
+        password: null
     }
 };
 export default (state = initialState, action) => {
@@ -27,6 +33,18 @@ export default (state = initialState, action) => {
                 ...state,
                 login_error: action.payload,
                 user: null
+            };
+
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+            };
+
+        case REGISTER_ERROR:
+            console.log(action.payload)
+            return {
+                ...state,
+                registration_errors: action.payload
             };
         default:
             return state;

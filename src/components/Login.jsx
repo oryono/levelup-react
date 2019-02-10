@@ -3,6 +3,7 @@ import Form from "../components/reusable/Form";
 import Joi from "joi-browser";
 import { login } from "../actions";
 import { connect } from "react-redux";
+import SocialButton from '../components/SocialButton'
 
 class Login extends Form {
     state = {
@@ -38,11 +39,11 @@ class Login extends Form {
                 <div className="row">
                     <div className="col-md-4" />
                     <div className="col-md-4 mt-5">
-                        {this.props.login_error && (
-                            <div className="alert alert-danger">
-                                {this.props.login_error}
-                            </div>
-                        )}
+                        {/*{this.props.login_error && (*/}
+                            {/*<div className="alert alert-danger">*/}
+                                {/*{this.props.login_error}*/}
+                            {/*</div>*/}
+                        {/*)}*/}
                         <form action="" onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <input
